@@ -11,6 +11,7 @@ from datetime import datetime
 from engine.config_loader import load_config
 from engine.model_loader import load_model_and_tokenizer
 from engine.registry import save_benchmark_result
+from engine.analyzer import analyze_benchmarks
 from profiling.memory_profiler import get_peak_memory, reset_memory_stats
 from profiling.time_profiler import TimeProfiler
 from profiling.throughput import calculate_throughput
@@ -24,8 +25,18 @@ parser.add_argument("--config", type=str, default="configs/baseline_config.json"
 parser.add_argument("--batch_size", type=int, default=None)
 parser.add_argument("--epochs", type=int, default=None)
 parser.add_argument("--mixed_precision", action="store_true")
+parser.add_argument("--analyze", action="store_true")
 
 args = parser.parse_args()
+
+# ------------------------------------------------
+# Analytics-Only Mode
+# ------------------------------------------------
+if args.analyze:
+    report = analyze_benchmarks()
+    print("Benchmark Analysis Report:")
+    print(json.dumps(report, indent=4))
+    exit()
 
 # ------------------------------------------------
 # Load Config

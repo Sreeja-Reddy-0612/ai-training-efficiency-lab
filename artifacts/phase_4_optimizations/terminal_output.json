@@ -1,0 +1,154 @@
+
+{
+    "total_experiments": 5,
+    "best_throughput_experiment": {
+        "experiment_id": "20260212_200715",
+        "mode": "transformer_baseline",
+        "model": "distilbert-base-uncased",
+        "batch_size": 16,
+        "epochs": 1,
+        "mixed_precision": false,
+        "total_time_seconds": 129.6776,
+        "peak_memory_gb": 0.0,
+        "throughput_samples_per_sec": 1.93,
+        "device": "cpu"
+    },
+    "fastest_experiment": {
+        "experiment_id": "20260212_200715",
+        "mode": "transformer_baseline",
+        "model": "distilbert-base-uncased",
+        "batch_size": 16,
+        "epochs": 1,
+        "mixed_precision": false,
+        "total_time_seconds": 129.6776,
+        "peak_memory_gb": 0.0,
+        "throughput_samples_per_sec": 1.93,
+        "device": "cpu"
+    },
+    "average_throughput": 1.822,
+    "average_time_seconds": 192.2438,
+    "ranked_by_throughput": [
+        {
+            "experiment_id": "20260212_200715",
+            "mode": "transformer_baseline",
+            "model": "distilbert-base-uncased",
+            "batch_size": 16,
+            "epochs": 1,
+            "mixed_precision": false,
+            "total_time_seconds": 129.6776,
+            "peak_memory_gb": 0.0,
+            "throughput_samples_per_sec": 1.93,
+            "device": "cpu"
+        },
+        {
+            "experiment_id": "20260212_200101",
+            "mode": "transformer_baseline",
+            "model": "distilbert-base-uncased",
+            "batch_size": 16,
+            "epochs": 2,
+            "mixed_precision": false,
+            "total_time_seconds": 269.6922,
+            "peak_memory_gb": 0.0,
+            "throughput_samples_per_sec": 1.85,
+            "device": "cpu"
+        },
+        {
+            "experiment_id": "20260212_201239",
+            "mode": "transformer_baseline",
+            "model": "distilbert-base-uncased",
+            "batch_size": 8,
+            "epochs": 2,
+            "mixed_precision": false,
+            "total_time_seconds": 279.2403,
+            "peak_memory_gb": 0.0,
+            "throughput_samples_per_sec": 1.79,
+            "device": "cpu"
+        },
+        {
+            "experiment_id": "20260212_201534",
+            "mode": "transformer_baseline",
+            "model": "distilbert-base-uncased",
+            "batch_size": 8,
+            "epochs": 1,
+            "mixed_precision": true,
+            "total_time_seconds": 139.4918,
+            "peak_memory_gb": 0.0,
+            "throughput_samples_per_sec": 1.79,
+            "device": "cpu"
+        },
+        {
+            "experiment_id": "20260212_200430",
+            "mode": "transformer_baseline",
+            "model": "distilbert-base-uncased",
+            "batch_size": 8,
+            "epochs": 1,
+            "mixed_precision": false,
+            "total_time_seconds": 143.1172,
+            "peak_memory_gb": 0.0,
+            "throughput_samples_per_sec": 1.75,
+            "device": "cpu"
+        }
+    ],
+    "ranked_by_time": [
+        {
+            "experiment_id": "20260212_200715",
+            "mode": "transformer_baseline",
+            "model": "distilbert-base-uncased",
+            "batch_size": 16,
+            "epochs": 1,
+            "mixed_precision": false,
+            "total_time_seconds": 129.6776,
+            "peak_memory_gb": 0.0,
+            "throughput_samples_per_sec": 1.93,
+            "device": "cpu"
+        },
+        {
+            "experiment_id": "20260212_201534",
+            "mode": "transformer_baseline",
+            "model": "distilbert-base-uncased",
+            "batch_size": 8,
+            "epochs": 1,
+            "mixed_precision": true,
+            "total_time_seconds": 139.4918,
+            "peak_memory_gb": 0.0,
+            "throughput_samples_per_sec": 1.79,
+            "device": "cpu"
+        },
+        {
+            "experiment_id": "20260212_200430",
+            "mode": "transformer_baseline",
+            "model": "distilbert-base-uncased",
+            "batch_size": 8,
+            "epochs": 1,
+            "mixed_precision": false,
+            "total_time_seconds": 143.1172,
+            "peak_memory_gb": 0.0,
+            "throughput_samples_per_sec": 1.75,
+            "device": "cpu"
+        },
+        {
+            "experiment_id": "20260212_200101",
+            "mode": "transformer_baseline",
+            "model": "distilbert-base-uncased",
+            "batch_size": 16,
+            "epochs": 2,
+            "mixed_precision": false,
+            "total_time_seconds": 269.6922,
+            "peak_memory_gb": 0.0,
+            "throughput_samples_per_sec": 1.85,
+            "device": "cpu"
+        },
+        {
+            "experiment_id": "20260212_201239",
+            "mode": "transformer_baseline",
+            "model": "distilbert-base-uncased",
+            "batch_size": 8,
+            "epochs": 2,
+            "mixed_precision": false,
+            "total_time_seconds": 279.2403,
+            "peak_memory_gb": 0.0,
+            "throughput_samples_per_sec": 1.79,
+            "device": "cpu"
+        }
+    ]
+}

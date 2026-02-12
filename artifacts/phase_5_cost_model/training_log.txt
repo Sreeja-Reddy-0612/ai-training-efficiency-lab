@@ -1,0 +1,29 @@
+AI Training Efficiency Lab
+Phase 5 - Cost Simulation Engine
+
+Execution Commands:
+
+1. python -m engine.train --analyze
+2. python -m engine.train --analyze --cost_device A100
+3. python -m engine.train --analyze --cost_device T4
+
+Cost Simulation Results:
+
+CPU Mode:
+- Cheapest Run Cost: $0.0018
+- Average Cost: $0.0027
+
+A100 Simulation:
+- Cheapest Run Cost: $0.0901
+- Average Cost: $0.1335
+
+T4 Simulation:
+- Cheapest Run Cost: $0.0126
+- Average Cost: $0.0187
+
+Observations:
+
+- Same configuration remains cheapest across devices (shortest runtime).
+- Cost scales linearly with hourly GPU rate.
+- Throughput remains unchanged (simulation mode).
+- Benchmark system now supports performance + cost tradeoff analysis.

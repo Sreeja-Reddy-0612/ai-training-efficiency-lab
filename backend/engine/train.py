@@ -26,6 +26,7 @@ parser.add_argument("--batch_size", type=int, default=None)
 parser.add_argument("--epochs", type=int, default=None)
 parser.add_argument("--mixed_precision", action="store_true")
 parser.add_argument("--analyze", action="store_true")
+parser.add_argument("--cost_device", type=str, default="cpu")
 
 args = parser.parse_args()
 
@@ -33,10 +34,11 @@ args = parser.parse_args()
 # Analytics-Only Mode
 # ------------------------------------------------
 if args.analyze:
-    report = analyze_benchmarks()
+    report = analyze_benchmarks(device_for_cost=args.cost_device)
     print("Benchmark Analysis Report:")
     print(json.dumps(report, indent=4))
     exit()
+
 
 # ------------------------------------------------
 # Load Config

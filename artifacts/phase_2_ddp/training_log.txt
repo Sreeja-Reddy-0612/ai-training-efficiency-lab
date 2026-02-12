@@ -1,0 +1,30 @@
+AI Training Efficiency Lab
+Phase 2 - Transformer Baseline
+
+Execution Command:
+python -m engine.train
+
+Model:
+distilbert-base-uncased
+
+Dataset:
+IMDb (1% subset)
+
+Results:
+{
+    "mode": "transformer_baseline",
+    "model": "distilbert-base-uncased",
+    "epochs": 1,
+    "total_time_seconds": 163.4203,
+    "peak_memory_gb": 0.0,
+    "throughput_samples_per_sec": 1.53,
+    "device": "cpu"
+}
+
+Observations:
+- HuggingFace model successfully loaded
+- Classification head initialized
+- Tokenization pipeline working
+- Training loop executed correctly
+- Profiling metrics captured successfully
+- CPU execution is significantly slower than dummy baseline (expected)

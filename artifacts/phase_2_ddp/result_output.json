@@ -1,0 +1,11 @@
+{
+    "phase": "Phase 2 - Transformer Baseline",
+    "mode": "transformer_baseline",
+    "model": "distilbert-base-uncased",
+    "epochs": 1,
+    "total_time_seconds": 163.4203,
+    "peak_memory_gb": 0.0,
+    "throughput_samples_per_sec": 1.53,
+    "device": "cpu",
+    "notes": "Executed on CPU-only system. Classification head initialized during fine-tuning."
+}

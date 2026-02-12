@@ -1,0 +1,9 @@
+{
+    "mode": "transformer_baseline",
+    "model": "distilbert-base-uncased",
+    "epochs": 1,
+    "total_time_seconds": 140.86,
+    "peak_memory_gb": 0.0,
+    "throughput_samples_per_sec": 1.77,
+    "device": "cpu"
+}

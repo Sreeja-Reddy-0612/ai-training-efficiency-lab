@@ -1,0 +1,8 @@
+{
+    "mode": "single_gpu_fp32_baseline",
+    "epochs": 2,
+    "total_time_seconds": 1.432,
+    "peak_memory_gb": 0.0,
+    "throughput_samples_per_sec": 6983.33,
+    "device": "cpu"
+}

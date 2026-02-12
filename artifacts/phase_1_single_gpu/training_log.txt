@@ -1,0 +1,24 @@
+AI Training Efficiency Lab
+Phase 1 - Baseline Benchmark
+
+Execution Command:
+python -m engine.train
+
+Output:
+Benchmark Completed.
+
+{
+    "mode": "single_gpu_fp32_baseline",
+    "epochs": 2,
+    "total_time_seconds": 1.432,
+    "peak_memory_gb": 0.0,
+    "throughput_samples_per_sec": 6983.33,
+    "device": "cpu"
+}
+
+Observations:
+- Running in CPU-only mode
+- CUDA not available
+- Peak GPU memory correctly returned 0.0
+- Throughput calculated successfully
+- JSON logging working properly

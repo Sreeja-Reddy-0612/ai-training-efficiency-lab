@@ -1,0 +1,12 @@
+{
+    "experiment_id": "20260212_201534",
+    "mode": "transformer_baseline",
+    "model": "distilbert-base-uncased",
+    "batch_size": 8,
+    "epochs": 1,
+    "mixed_precision": true,
+    "total_time_seconds": 139.4918,
+    "peak_memory_gb": 0.0,
+    "throughput_samples_per_sec": 1.79,
+    "device": "cpu"
+}

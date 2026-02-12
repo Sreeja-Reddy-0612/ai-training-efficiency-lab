@@ -1,0 +1,31 @@
+AI Training Efficiency Lab
+Phase 3 - CLI Benchmarking & Mixed Precision Support
+
+Commands Executed:
+
+1. python -m engine.train --config configs/baseline_config.json --batch_size 16 --epochs 2
+2. python -m engine.train
+3. python -m engine.train --batch_size 16
+4. python -m engine.train --epochs 2
+5. python -m engine.train --mixed_precision
+
+Observations:
+
+- CLI override works correctly
+- Experiment IDs generated uniquely
+- Results appended to benchmark_history.json
+- Throughput consistent across CPU runs
+- Mixed precision flag functional (GPU-ready design)
+- Registry system successfully tracking historical experiments
+
+
+Phase 3 Summary (Your Runs)
+
+You executed multiple experiments:
+
+Batch Size	Epochs	Mixed Precision	Time (sec)	Throughput
+   16	      2	         False	      269.69	  1.85
+   8	      1	         False	      143.11	  1.75
+   16	      1	         False	      129.67	  1.93
+   8	      2	         False	      279.24	  1.79
+   8	      1	         True	      139.49	  1.79

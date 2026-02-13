@@ -7,11 +7,14 @@ from torch.optim import AdamW
 from transformers import get_scheduler
 from datasets import load_dataset
 from datetime import datetime
+from torch.nn.parallel import DistributedDataParallel as DDP
+from torch.utils.data.distributed import DistributedSampler
 
 from engine.config_loader import load_config
 from engine.model_loader import load_model_and_tokenizer
 from engine.registry import save_benchmark_result
 from engine.analyzer import analyze_benchmarks
+from engine.distributed import init_distributed, cleanup_distributed
 from profiling.memory_profiler import get_peak_memory, reset_memory_stats
 from profiling.time_profiler import TimeProfiler
 from profiling.throughput import calculate_throughput
@@ -27,8 +30,20 @@ parser.add_argument("--epochs", type=int, default=None)
 parser.add_argument("--mixed_precision", action="store_true")
 parser.add_argument("--analyze", action="store_true")
 parser.add_argument("--cost_device", type=str, default="cpu")
+parser.add_argument("--distributed", action="store_true")
 
 args = parser.parse_args()
+
+# ------------------------------------------------
+# Initialize Distributed Training
+# ------------------------------------------------
+is_distributed = False
+rank = 0
+world_size = 1
+local_rank = 0
+
+if args.distributed:
+    is_distributed, rank, world_size, local_rank = init_distributed()
 
 # ------------------------------------------------
 # Analytics-Only Mode
@@ -38,7 +53,6 @@ if args.analyze:
     print("Benchmark Analysis Report:")
     print(json.dumps(report, indent=4))
     exit()
-
 
 # ------------------------------------------------
 # Load Config
@@ -54,13 +68,25 @@ if args.batch_size:
 if args.epochs:
     config["epochs"] = args.epochs
 
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+# ------------------------------------------------
+# Device Setup
+# ------------------------------------------------
+if torch.cuda.is_available():
+    DEVICE = torch.device(f"cuda:{local_rank}")
+else:
+    DEVICE = torch.device("cpu")
 
 # ------------------------------------------------
 # Model & Tokenizer
 # ------------------------------------------------
 model, tokenizer = load_model_and_tokenizer(config["model_name"])
 model.to(DEVICE)
+
+if is_distributed:
+    model = DDP(
+        model,
+        device_ids=[local_rank] if torch.cuda.is_available() else None
+    )
 
 # ------------------------------------------------
 # Dataset
@@ -77,9 +103,23 @@ def tokenize_function(examples):
 
 dataset = dataset.map(tokenize_function, batched=True)
 dataset = dataset.rename_column("label", "labels")
-dataset.set_format(type="torch", columns=["input_ids", "attention_mask", "labels"])
+dataset.set_format(
+    type="torch",
+    columns=["input_ids", "attention_mask", "labels"]
+)
 
-dataloader = DataLoader(dataset, batch_size=config["batch_size"])
+if is_distributed:
+    sampler = DistributedSampler(dataset)
+    dataloader = DataLoader(
+        dataset,
+        batch_size=config["batch_size"],
+        sampler=sampler
+    )
+else:
+    dataloader = DataLoader(
+        dataset,
+        batch_size=config["batch_size"]
+    )
 
 # ------------------------------------------------
 # Optimizer & Scheduler
@@ -100,7 +140,9 @@ scheduler = get_scheduler(
 time_profiler = TimeProfiler()
 reset_memory_stats()
 
-scaler = torch.cuda.amp.GradScaler() if args.mixed_precision and DEVICE == "cuda" else None
+scaler = None
+if args.mixed_precision and torch.cuda.is_available():
+    scaler = torch.cuda.amp.GradScaler()
 
 # ------------------------------------------------
 # Training Loop
@@ -111,6 +153,10 @@ time_profiler.start()
 total_samples = 0
 
 for epoch in range(config["epochs"]):
+
+    if is_distributed:
+        sampler.set_epoch(epoch)
+
     for batch in dataloader:
         batch = {k: v.to(DEVICE) for k, v in batch.items()}
 
@@ -120,6 +166,7 @@ for epoch in range(config["epochs"]):
             with torch.cuda.amp.autocast():
                 outputs = model(**batch)
                 loss = outputs.loss
+
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
@@ -145,7 +192,7 @@ experiment_id = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 results = {
     "experiment_id": experiment_id,
-    "mode": "transformer_baseline",
+    "mode": "transformer_baseline_distributed" if is_distributed else "transformer_baseline",
     "model": config["model_name"],
     "batch_size": config["batch_size"],
     "epochs": config["epochs"],
@@ -153,18 +200,27 @@ results = {
     "total_time_seconds": round(total_time, 4),
     "peak_memory_gb": round(peak_memory, 4),
     "throughput_samples_per_sec": round(throughput, 2),
-    "device": DEVICE
+    "device": str(DEVICE),   # FIXED
+    "distributed": is_distributed,
+    "world_size": world_size
 }
 
 # ------------------------------------------------
-# Save Results
+# Save Results (Rank 0 Only)
 # ------------------------------------------------
-os.makedirs("results", exist_ok=True)
+if rank == 0:
+    os.makedirs("results", exist_ok=True)
 
-with open("results/phase3_latest.json", "w") as f:
-    json.dump(results, f, indent=4)
+    with open("results/phase6_latest.json", "w") as f:
+        json.dump(results, f, indent=4)
 
-save_benchmark_result(results)
+    save_benchmark_result(results)
 
-print("Phase 3 Benchmark Completed.")
-print(json.dumps(results, indent=4))
+    print("Phase 6 Benchmark Completed.")
+    print(json.dumps(results, indent=4))
+
+# ------------------------------------------------
+# Cleanup
+# ------------------------------------------------
+if is_distributed:
+    cleanup_distributed()

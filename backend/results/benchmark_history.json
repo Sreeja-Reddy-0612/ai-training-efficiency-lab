@@ -58,5 +58,19 @@
         "peak_memory_gb": 0.0,
         "throughput_samples_per_sec": 1.79,
         "device": "cpu"
+    },
+    {
+        "experiment_id": "20260213_102437",
+        "mode": "transformer_baseline",
+        "model": "distilbert-base-uncased",
+        "batch_size": 8,
+        "epochs": 1,
+        "mixed_precision": false,
+        "total_time_seconds": 158.1103,
+        "peak_memory_gb": 0.0,
+        "throughput_samples_per_sec": 1.58,
+        "device": "cpu",
+        "distributed": false,
+        "world_size": 1
     }
 ]

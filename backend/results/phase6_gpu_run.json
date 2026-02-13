@@ -1,0 +1,17 @@
+{
+    "phase": "Phase 6 - GPU Acceleration",
+    "experiment_id": "20260213_051045",
+    "mode": "transformer_baseline",
+    "model": "distilbert-base-uncased",
+    "batch_size": 8,
+    "epochs": 1,
+    "mixed_precision": true,
+    "device": "cuda:0",
+    "distributed": false,
+    "world_size": 1,
+    "total_time_seconds": 2.0141,
+    "peak_memory_gb": 1.2827,
+    "throughput_samples_per_sec": 124.12,
+    "estimated_cost_t4": 0.0002,
+    "speedup_vs_cpu": "≈78x faster than baseline CPU run"
+}

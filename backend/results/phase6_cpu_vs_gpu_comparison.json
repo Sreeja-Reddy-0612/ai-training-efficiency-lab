@@ -1,0 +1,19 @@
+{
+    "phase": "Phase 6 - CPU vs GPU Comparison",
+    "cpu_baseline": {
+        "experiment_id": "20260212_200715",
+        "device": "cpu",
+        "total_time_seconds": 129.6776,
+        "throughput_samples_per_sec": 1.93
+    },
+    "gpu_mixed_precision": {
+        "experiment_id": "20260213_051045",
+        "device": "cuda:0",
+        "total_time_seconds": 2.0141,
+        "throughput_samples_per_sec": 124.12
+    },
+    "performance_gain": {
+        "time_reduction_factor": 64.4,
+        "throughput_increase_factor": 64.3
+    }
+}

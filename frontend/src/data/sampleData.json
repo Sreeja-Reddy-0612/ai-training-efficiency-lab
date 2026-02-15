@@ -1,0 +1,24 @@
+{
+  "summary": {
+    "total_experiments": 8,
+    "best_throughput": 124.12,
+    "fastest_time": 2.0141,
+    "cheapest_cost": 0.0002
+  },
+  "history": [
+    {
+      "experiment_id": "20260213_051045",
+      "throughput_samples_per_sec": 124.12,
+      "estimated_cost": 0.0002,
+      "total_time_seconds": 2.0141,
+      "device": "cuda:0"
+    },
+    {
+      "experiment_id": "20260213_051015",
+      "throughput_samples_per_sec": 63.25,
+      "estimated_cost": 0.0004,
+      "total_time_seconds": 3.9528,
+      "device": "cuda:0"
+    }
+  ]
+}

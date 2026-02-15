@@ -1,6 +1,6 @@
 import json
 import os
-from cost.cost_estimator import estimate_cost
+from backend.cost.cost_estimator import estimate_cost
 
 HISTORY_FILE = "results/benchmark_history.json"
 ANALYTICS_FILE = "results/analytics_report.json"

@@ -5,7 +5,6 @@ import ThroughputChart from "./components/ThroughputChart";
 import CostChart from "./components/CostChart";
 import BenchmarkTable from "./components/BenchmarkTable";
 import DecisionInsights from "./components/DecisionInsights";
-import sampleData from "./data/sampleData.json";
 
 function App() {
   const [latest, setLatest] = useState(null);
@@ -13,11 +12,15 @@ function App() {
 
   useEffect(() => {
     async function loadData() {
-      const latestData = await fetchLatest();
-      const historyData = await fetchHistory();
+      try {
+        const latestData = await fetchLatest();
+        const historyData = await fetchHistory();
 
-      setLatest(latestData);
-      setHistory(historyData);
+        setLatest(latestData);
+        setHistory(historyData);
+      } catch (error) {
+        console.error("Error loading data:", error);
+      }
     }
 
     loadData();
@@ -27,48 +30,20 @@ function App() {
 
   return (
     <div style={{ padding: "40px", fontFamily: "Arial" }}>
-      <h1 style={{ marginBottom: "30px" }}>
-        AI Training Efficiency Dashboard 🚀
-      </h1>
+      <h1>AI Training Efficiency Dashboard 🚀</h1>
 
-      {/* Summary */}
       <SummaryCard data={latest} />
 
-      {/* Charts Side by Side */}
-      <div
-        style={{
-          display: "flex",
-          gap: "30px",
-          marginTop: "40px",
-          flexWrap: "wrap",
-        }}
-      >
-        <div style={{ flex: 1, minWidth: "400px" }}>
-          <ThroughputChart data={history} />
-        </div>
-
-        <div style={{ flex: 1, minWidth: "400px" }}>
-          <CostChart data={history} />
-        </div>
+      {/* Charts side by side */}
+      <div style={{ display: "flex", gap: "40px" }}>
+        <ThroughputChart data={history} />
+        <CostChart data={history} />
       </div>
 
-      {/* Table + Intelligence Side by Side */}
-      <div
-        style={{
-          display: "flex",
-          gap: "30px",
-          marginTop: "50px",
-          alignItems: "flex-start",
-          flexWrap: "wrap",
-        }}
-      >
-        <div style={{ flex: 2, minWidth: "500px" }}>
-          <BenchmarkTable data={history} />
-        </div>
-
-        <div style={{ flex: 1, minWidth: "500px" }}>
-          <DecisionInsights history={sampleData.history} />
-        </div>
+      {/* Table + Decision side by side */}
+      <div style={{ display: "flex", gap: "40px", marginTop: "40px" }}>
+        <BenchmarkTable data={history} />
+        <DecisionInsights history={history} />
       </div>
     </div>
   );

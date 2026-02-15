@@ -1,4 +1,4 @@
-from cost.gpu_pricing import GPU_PRICING
+from backend.cost.gpu_pricing import GPU_PRICING
 
 
 def estimate_cost(device, total_time_seconds):

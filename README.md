@@ -1,164 +1,420 @@
-# 🚀 AI Training Efficiency Lab
+# Enterprise GraphRAG Intelligence Platform
 
-A platform-level AI infrastructure benchmarking system designed to evaluate distributed training strategies, GPU optimization techniques, and cost-performance tradeoffs across various configurations.
+Enterprise-grade **Graph-based Retrieval-Augmented Generation (GraphRAG)** system designed to enable **multi-hop reasoning**, **relationship-aware retrieval**, and **explainable AI decisions** using **Knowledge Graphs + Vector Search**.
 
----
+This system moves beyond traditional RAG by combining:
 
-## 🎯 Project Vision
+- Semantic similarity retrieval  
+- Structured knowledge graph traversal  
+- Multi-hop reasoning  
+- Path-level explainability  
+- Governance-ready response generation  
 
-Modern AI systems require intelligent tradeoffs between:
-
-- Training speed
-- GPU memory usage
-- Distributed scaling efficiency
-- Quantization strategies
-- Cloud infrastructure cost
-
-This platform is built to benchmark and compare:
-
-- DDP vs FSDP vs DeepSpeed ZeRO
-- FP32 vs FP16 vs 8-bit vs 4-bit
-- FlashAttention on/off
-- Gradient checkpointing
-- Single GPU vs Multi-GPU
-- Cost-performance tradeoffs
+The platform is designed for **enterprise AI systems** that require **traceability, structured reasoning, and reliability**.
 
 ---
 
-# 🏗 Architecture Overview
+## Problem Statement
 
-Benchmark Controller
-↓
-Training Engine
-↓
-Profiling Layer
-↓
-Cost Estimator
-↓
-API Layer
-↓
-Frontend Dashboard
+Most Retrieval-Augmented Generation (RAG) systems rely solely on vector similarity.
 
+In enterprise environments, this leads to:
 
----
+- Incomplete contextual reasoning  
+- No validation of entity relationships  
+- Hallucinated associations  
+- Lack of traceable reasoning paths  
+- No structured explanation of decisions  
+- Limited multi-hop reasoning capability  
 
-# 📁 Project Structure
-
-
-
-backend/
-├── engine/
-├── profiling/
-├── cost/
-├── api/
-├── configs/
-├── results/
-
-frontend/
-artifacts/
-docker/
-
+Traditional RAG answers questions.  
+**Enterprise systems must reason over connected facts.**
 
 ---
 
-# ✅ Phase 1 - Baseline Benchmark (Completed)
+## Solution Overview
 
-Implemented:
+This project implements a full **Enterprise GraphRAG Intelligence System** that:
 
-- Modular training engine
-- Time profiling
-- Peak GPU memory tracking (CUDA-aware)
-- Throughput measurement
-- Structured JSON result logging
-- Artifact tracking system
+- retrieves semantically relevant context using vector embeddings  
+- extracts and links entities  
+- traverses knowledge graph relationships  
+- performs multi-hop reasoning  
+- attaches explainable graph paths  
+- generates structured responses with confidence scores  
+- exposes governance and audit endpoints  
 
-### Sample Output
+The system behaves as a **reasoning engine**, not a simple RAG wrapper.
 
-```json
-{
-    "mode": "single_gpu_fp32_baseline",
-    "epochs": 2,
-    "total_time_seconds": 1.432,
-    "peak_memory_gb": 0.0,
-    "throughput_samples_per_sec": 6983.33,
-    "device": "cpu"
-}
+---
 
-🛠 Tech Stack
+## Intended Use Cases
 
-PyTorch
+- Enterprise compliance systems  
+- Financial document intelligence  
+- Regulatory assistants  
+- Legal knowledge retrieval systems  
+- Internal AI copilots  
+- AI systems requiring auditability  
+- Relationship-aware search engines  
 
-Hugging Face Transformers
+---
 
-Accelerate
+## System Architecture
 
-DeepSpeed (planned)
+```text
+User / Application
+        ↓
+React Dashboard
+        ↓
+FastAPI Backend
+        ↓
+Hybrid Retrieval Engine
+ ├─ Vector Retriever
+ ├─ Graph Retriever (Neo4j)
+ ├─ Hybrid Ranker
+        ↓
+Reasoning Engine
+ ├─ Entity Linking
+ ├─ Multi-hop Traversal
+ ├─ Path Scoring
+        ↓
+Explainability Layer
+ ├─ Evidence Paths
+ ├─ Confidence Score
+ ├─ Reasoning Type
+        ↓
+Governance & Diff Engine
+        ↓
+Audit & Metrics Layer
 
-FastAPI (planned)
+```
+## Key Features
+Hybrid Retrieval
 
-React + Vite (planned)
+Vector similarity search
 
-🧠 Engineering Philosophy
+Knowledge graph traversal
 
-This project is designed with:
+Hybrid result ranking
 
-Modular architecture
+Context deduplication
 
-Reproducible experiment tracking
+Knowledge Graph Integration
 
-Hardware-aware execution
+Neo4j graph database
 
-Cloud benchmark readiness
+Entity-level nodes
 
-Infrastructure-level thinking
+Relationship modeling
 
-🚀 Upcoming Phases
+Multi-hop traversal
 
-Phase 2: Distributed Training (DDP)
+Multi-Hop Reasoning
 
-Phase 3: DeepSpeed ZeRO Benchmarking
+Entity-based query expansion
 
-Phase 4: Optimization Strategies (Quantization, FlashAttention)
+Relationship validation
 
-Phase 5: Cost Simulation Engine
+Path scoring
 
-Phase 6: API Layer
+Structured inference
 
-Phase 7: Interactive Dashboard
+Explainability
 
-Phase 8: Docker & Deployment
+Rule-level evidence paths
 
-📌 Author
+Graph traversal trace
+
+Confidence interpretation
+
+Reasoning-type classification
+
+Governance Layer
+
+Structured response schema
+
+Confidence scoring
+
+Diff engine for graph changes
+
+Audit logs for system decisions
+
+Audit & Observability
+
+Query history tracking
+
+Governance event logging
+
+Risk-level summary
+
+Diff-based graph monitoring
+
+## Tech Stack
+Backend
+
+Python
+
+FastAPI
+
+Neo4j
+
+SentenceTransformers
+
+Pydantic
+
+Uvicorn
+
+Frontend
+
+React (Vite)
+
+JavaScript
+
+REST APIs
+
+Architecture
+
+Modular RAG pipeline
+
+Hybrid retrieval strategy
+
+Structured explainability engine
+
+Deterministic reasoning flow
+
+## Core APIs
+Compliance Query
+POST /compliance/query
+
+Returns:
+
+structured answer
+
+retrieved context
+
+confidence score
+
+Explainability
+GET /explain/latest
+
+Returns:
+
+evidence paths
+
+reasoning type
+
+confidence interpretation
+
+structured trace
+
+Diff Engine
+GET /diff/report
+
+Returns:
+
+graph change summary
+
+added / removed relationships
+
+structural change metrics
+
+Governance Report
+GET /governance/report
+
+Returns:
+
+risk summary
+
+risk distribution
+
+overall risk score
+
+Audit Logs
+GET /audit/logs
+
+Returns:
+
+execution history
+
+timestamps
+
+event types
+
+decision trace
+
+## How It Works (High-Level Flow)
+
+User submits a compliance or knowledge query
+
+Vector retriever fetches semantically similar documents
+
+Entities are extracted from query and context
+
+Graph retriever traverses Neo4j relationships
+
+Multi-hop reasoning validates entity connections
+
+Hybrid ranker merges vector + graph signals
+
+Structured response is generated
+
+Evidence paths are attached
+
+Confidence score is computed
+
+Governance and audit logs are updated
+
+Why GraphRAG Instead of Traditional RAG?
+
+Traditional RAG
+
+Query → Similar chunks → Generate
+
+GraphRAG
+
+Query → Entity Extraction → Relationship Traversal
+     → Multi-hop Reasoning → Explainable Output
+
+GraphRAG enables:
+
+Structured reasoning
+
+Reduced hallucinations
+
+Traceable decision paths
+
+Enterprise-grade reliability
+
+Relationship validation
+
+Audit-ready explainability
+
+## How to Run Locally
+1️⃣ Start Neo4j
+
+Ensure Neo4j is running locally:
+
+bolt://localhost:7687
+
+Set credentials in .env:
+
+NEO4J_URI=bolt://localhost:7687
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=your_password
+2️⃣ Backend
+cd backend
+python -m venv venv
+venv\Scripts\activate   # Windows
+pip install -r requirements.txt
+uvicorn backend.api.main:app --reload
+
+Backend:
+
+http://127.0.0.1:8000
+
+Swagger:
+
+http://127.0.0.1:8000/docs
+3️⃣ Frontend
+cd frontend
+npm install
+npm run dev
+
+Frontend:
+
+http://localhost:5173
+## Project Phases
+Phase 1–2
+
+Basic RAG pipeline
+
+Vector retrieval
+
+Phase 3–4
+
+Neo4j integration
+
+Graph modeling
+
+Phase 5–6
+
+Hybrid retrieval
+
+Ranking and merging
+
+Phase 7
+
+Explainability engine
+
+Evidence paths
+
+Confidence scoring
+
+Phase 8
+
+Governance reporting
+
+Diff engine
+
+Audit logs
+
+Phase 9 (Optional)
+
+Graph visualization UI
+
+Graph-based risk propagation
+
+Policy-constrained traversal
+
+Deployment infrastructure
+
+## Design Principles
+
+Relationship-aware retrieval
+
+Explainability by default
+
+Structured reasoning over similarity-only search
+
+Deterministic hybrid ranking
+
+Enterprise reliability standards
+
+Audit-ready AI systems
+
+## Project Outcome
+
+This project demonstrates the ability to:
+
+design hybrid RAG architectures
+
+integrate vector + graph retrieval
+
+implement multi-hop reasoning systems
+
+generate explainable AI outputs
+
+reduce hallucinations via structured validation
+
+build governance-ready AI pipelines
+
+## Author
 
 Sreeja Reddy
-AI Systems & Infrastructure Engineering Focus
 
+AI Engineer focused on:
 
----
+Enterprise GraphRAG Systems
 
-# 🏆 Where You Are Now
+Knowledge Graph Reasoning
 
-You officially built:
+GenAI Reliability Engineering
 
-✔ Modular benchmark engine  
-✔ Artifact system  
-✔ Structured logging  
-✔ Production-style package structure  
+AI Governance Infrastructure
 
-That’s Phase 1 done properly.
+GitHub:
+https://github.com/Sreeja-Reddy-0612
 
----
-
-# 🚀 Next Step
-
-Now we level up:
-
-> Phase 2 — Configuration-driven Benchmark Engine + HuggingFace Transformer Baseline
-
-This is where it starts becoming serious.
-
-Say:
-
-**“Start Phase 2 — Config System + Transformer Baseline”**
-
-And we continue.
+LinkedIn:
+https://www.linkedin.com/in/sreeja-reddy-5ab708288/
